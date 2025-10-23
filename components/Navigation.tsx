@@ -8,10 +8,13 @@ const navItems = [
   { label: 'Palestrantes', href: '#palestrantes' },
   { label: 'Local', href: '#local' },
   { label: 'Contato', href: '#contato' },
+  { label: 'Pokédex', href: '/pokemon', external: true },
 ]
 
 export default function Navigation() {
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string, external?: boolean) => {
+    if (external) return // Deixa o Link lidar com navegação externa
+    
     e.preventDefault()
     const element = document.querySelector(href)
     if (element) {
@@ -27,7 +30,7 @@ export default function Navigation() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                onClick={(e) => scrollToSection(e, item.href)}
+                onClick={(e) => scrollToSection(e, item.href, item.external)}
                 className="text-gray-700 font-medium hover:text-secondary transition-colors border-b-2 border-transparent hover:border-secondary pb-1"
               >
                 {item.label}
